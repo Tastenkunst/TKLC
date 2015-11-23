@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<style>
+
+		html, body 			{ padding: 0; margin: 0; overflow: hidden; }
+		div 				{ padding: 0; margin: 0; position: absolute; display: block; }
+		iframe				{ position: absolute; display: block; margin: 0; padding: 0; border-style: none; }
+
+		.tk_v151119			{ left:   0;   top:   0;   width: 100vw; height: 100vh; background: #ffffff;}
+		#site				{ position: relative; 	   width: 888px; height: 100%;  margin-left: auto; margin-right: auto;}
+
+		#leader				{ left:   0;   top:   0;   width: 728px; height:  90px; }
+		#sky_right			{ left: 728px; top:   0;   width: 160px; height: 600px; }
+		#content			{ left:   0;   top:  95px; width: 723px; height: 800px; background-color: #e0e0e0; }
+
+	</style>
+</head>
+<body>
+<div id="site_wrapper" class="tk_v151119">
+	<div id="site">
+		<div id="content"></div>
+		<iframe id="leader" src="728x90/index.html" frameborder="0"></iframe>
+		<iframe id="sky_right" src="160x600/index.html" frameborder="0"></iframe>
+	</div>
+</div>
+</body>
+
+<script type="text/javascript">
+
+	(function(win, doc){
+		var idIframe1 = "leader"; //iframe id
+		var idIframe2 = "sky_right"; //iframe id
+		var host = "*";
+
+		function addEvent( event, obj, func ){
+			if( win.addEventListener ){
+				obj.addEventListener( event, func, false );
+			}
+			else if( doc.attachEvent ){
+				obj.attachEvent( 'on' + event, func );
+			}
+		}
+
+		addEvent("message", win, function(event) {
+			// send all messages from / to all ads.
+			doc.getElementById(idIframe1).contentWindow.postMessage(event.data, host);
+			doc.getElementById(idIframe2).contentWindow.postMessage(event.data, host);
+		});
+	})(window.top, window.top.document);
+
+</script>
+</html>

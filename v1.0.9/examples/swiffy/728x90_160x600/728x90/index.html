@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="ad.size" content="width=728,height=90">
+
+	<!-- Swiffy runtime and converted object -->
+	<script type="text/javascript" src="runtime.js"></script>
+	<script type="text/javascript" src="728x90.js"></script>
+
+	<style>
+
+		html, body 			{ padding: 0; margin: 0; overflow: hidden; }
+		div 				{ padding: 0; margin: 0; position: absolute; display: block; }
+
+		.tk_v151119			{ left:   0;   top:   0;   width: 728px; height:  90px; background: #ffffff; cursor: pointer; overflow: hidden; }
+
+		.outline			{ left:   0;   top:   0;   width: 728px; height:  90px; background: #5e5e5e; }
+		#outline_top		{ 										 height:   1px; }
+		#outline_left		{						   width:   1px; 				}
+
+		#outline_right		{ left: 727px;			   width:   1px;				}
+		#outline_bottom		{			   top: 89px;				 height:   1px; }
+
+	</style>
+</head>
+<body>
+<div id="container_ad" class="tk_v151119">
+
+	<div id="swiffycontainer" class="tk_v151119">
+		<div style="position: absolute; width: 100%; height: 100%; overflow: hidden; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-user-select: none;">
+			<canvas width="1456" height="180" style="width: 728px; height: 90px; position: absolute; left: 0px; top: 0px;"></canvas>
+		</div>
+	</div>
+	<script>
+		var stage = new swiffy.Stage(document.getElementById('swiffycontainer'), swiffyobject, {});
+	</script>
+
+	<div id="outline_top"		class="outline"></div>
+	<div id="outline_bottom"	class="outline"></div>
+	<div id="outline_left"		class="outline"></div>
+	<!--<div id="outline_right"		class="outline"></div>-->
+
+</div>
+</body>
+
+<!-- TKLC -->
+<script>
+	var tklib = {};
+	tklib.DISPLAY_NAME = "728x90";
+	//	tklib.ENV__TEST_HOSTS = ["localhost", "tmp5258.s3.amazonaws.com"];
+	tklib.traceEnabled = true;
+</script>
+<script src="//d1bh1gwjshk0ig.cloudfront.net/libs/tklc/TKLC_v1.0.9.min.js"></script>
+
+<script>
+
+	var numLoops = 0;
+	var loopWithoutLC = false;
+
+	function onLoop() {
+		trace("onLoop ::: numLoops ::: " + numLoops++);
+
+		if(loopWithoutLC) {
+			onSync();
+		} else {
+			tklib.tklc.sendMessage(tklib.TKLC.MSG__SYNC); //Master is sending MSG__SYNC
+		}
+	}
+
+	function initLocalConnection() {
+		trace("initLocalConnection");
+
+		tklib.tklc = new tklib.TKLC();
+		tklib.tklc.on(tklib.TKLC.EVENT__START_WITH_LC, startWithLC);
+		tklib.tklc.on(tklib.TKLC.EVENT__START_WITHOUT_LC, startWithoutLC);
+
+		// Custom messages to send. eg. a sync message
+		tklib.TKLC.MSG__SYNC = "MSG__SYNC";
+
+		tklib.tklc.on(tklib.TKLC.MSG__SYNC, onSync);
+
+		tklib.tklc.init("728x90", ["160x600"], true, tklib.TKLC.API__SESSION_STORAGE, null);
+	}
+
+	function startWithLC() {
+		onLoop();
+	}
+
+	function startWithoutLC() {
+		loopWithoutLC = true;
+		onLoop();
+	}
+
+	function onSync() {
+		trace("onSync");
+		sendToAS("MSG__SYNC");
+	}
+
+	function sendToAS(msg) {
+		var container = document.getElementById("swiffycontainer");
+		trace("JS ::: sendToAS ::: check ::: " + msg + " (" + container + ")");
+
+		if(container[msg]) {
+			trace("JS ::: sendToAS ::: sending ::: " + msg + " (" + container + ")");
+			container[msg]();
+		}
+	}
+
+	function onExternalInterfaceReady() {
+		trace("JS ::: onExternalInterfaceReady");
+		initLocalConnection();
+	}
+
+	function startStage() {
+		trace("JS ::: startStage");
+		stage.start();
+	}
+
+	window.onload = startStage;
+
+</script>
+</html>

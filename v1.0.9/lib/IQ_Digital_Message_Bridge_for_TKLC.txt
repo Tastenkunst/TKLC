@@ -1,0 +1,29 @@
+
+<script type="text/javascript">
+
+	(function(win, doc){
+		var iFrame1_ID = "superbanner";	// Should be filled in by the hoster, either IQ or eg. FT, Sizmek etc.
+		var iFrame2_ID = "skyleft";		// Should be filled in by the hoster, either IQ or eg. FT, Sizmek etc.
+		var iFrame3_ID = "skyright";	// Should be filled in by the hoster, either IQ or eg. FT, Sizmek etc.
+		var msgCreativeHost = "https://tmp5258.s3.amazonaws.com"; 	// Should be filled in by the hoster, either IQ or eg. FT, Sizmek etc.
+
+		function addEvent( event, obj, func ){
+			if( win.addEventListener ){
+				obj.addEventListener( event, func, false );
+			}
+			else if( doc.attachEvent ){
+				obj.attachEvent( 'on' + event, func );
+			}
+		}
+
+		addEvent("message", win, function(event) {
+			if (event.origin === msgCreativeHost) {
+				// send all messages from / to all ads.
+				doc.getElementById(iFrame1_ID).contentWindow.postMessage(event.data, msgCreativeHost);
+				doc.getElementById(iFrame2_ID).contentWindow.postMessage(event.data, msgCreativeHost);
+				doc.getElementById(iFrame3_ID).contentWindow.postMessage(event.data, msgCreativeHost);
+			}
+		});
+	})( (top === self) ? window : window.top, (top === self) ? document : window.top.document);
+
+</script>

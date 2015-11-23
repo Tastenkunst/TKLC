@@ -17,12 +17,14 @@
  * @author: Marcel Klammer, m.klammer@tastenkunst.com
  **/
 
+##########
+
 Download:
 https://www.dropbox.com/s/7qk25rrpwi6h2xf/TKLC_151119_v1.0.9_release.zip?dl=0
 
-Example Previews: 
+##########
 
-APIs:
+Example Previews: 
 
 tklib.TKLC.API__POST_MESSAGE
 
@@ -43,11 +45,15 @@ http://www.flashtalking.net/view/demo/52821/1/?9507732
 
 tklib.TKLC.API__ADFORM
 
-http://www.adform.com/LivePreviewHtmlInject/LivePreview.ashx?tag=4677437&e=0&positioning=2%3Dx%3A354%2Cy%3A7%2Cs%3Afalse%3B1%3Dx%3A-90%2Cy%3A-593%2Cs%3Afalse
+http://www.adform.com/LivePreviewHtmlInject/LivePreview.ashx?tag=4677437&e=0&positioning=1%3Dx%3A-80%2Cy%3A0%2Cs%3Afalse%3B2%3Dx%3A728%2Cy%3A0%2Cs%3Afalse
 
 Swiffy Wallpaper:
 https://tastenkunst.s3.amazonaws.com/libs/tklc/releases/v1.0.9/swiffy/728x90_160x600/index.html
 
+Sizmek/MediaMind:
+http://platform.mediamind.com/Eyeblaster.Preview.Web/Default.aspx?previewID=Dv5jAPSVmL3crgFxVsLSMj5UnAhKx5gYEAv4lI66fNZ1rmwWAwTQnA%3D%3D&AdID=32154631&lang=en-US
+
+##########
 
 Current state of HTML local connection ads, that we are aware of:
 
@@ -69,4 +75,11 @@ FlashTalking:
 
 Adform:
 + has own postMessage API. Worked for us 100% up until now.
+
+Swiffy:
++ All APIs possible
++ it just adds another layer of ExternalInterface.calls in the FLA file
+
+
+
 

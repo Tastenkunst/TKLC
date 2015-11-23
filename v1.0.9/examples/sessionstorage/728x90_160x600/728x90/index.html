@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="ad.size" content="width=728,height=90">
+
+	<style>
+
+		html, body 			{ padding: 0; margin: 0; overflow: hidden; }
+		div 				{ padding: 0; margin: 0; position: absolute; display: block; }
+
+		.tk_v151119			{ left:   0;   top:   0;   width: 728px; height:  90px; background: #ffffff; cursor: pointer; overflow: hidden; }
+
+		.outline			{ left:   0;   top:   0;   width: 728px; height:  90px; background: #5e5e5e; }
+		#outline_top		{ 										 height:   1px; }
+		#outline_left		{						   width:   1px; 				}
+		#outline_right		{ left: 727px;			   width:   1px;				}
+		#outline_bottom		{			   top: 89px;				 height:   1px; }
+
+		#box				{ left:   0;   top:   0;   width: 160px; height:  90px; background: #26aaf4; }
+		#box_text			{ left:  10px; top:  10px; width: 708px; height:  70px; background: #f4d88b; opacity: 0.66; }
+
+		p					{ position: absolute; left:  10px; top:  10px; margin: 0; padding: 0; font-family: Arial; }
+
+	</style>
+</head>
+<body>
+<div id="container_ad" class="tk_v151119">
+
+	<div id="box"></div>
+
+	<div id="outline_top"		class="outline"></div>
+	<div id="outline_bottom"	class="outline"></div>
+	<div id="outline_left"		class="outline"></div>
+	<!--<div id="outline_right"		class="outline"></div>-->
+
+	<div id="box_text">
+		<p>Wallpaper: 728x90_160x600<br/>Local Connection via tklib.TKLC.API__SESSION_STORAGE.<br />Infos and updates on <a href="https://github.com/Tastenkunst/TKLC">https://github.com/Tastenkunst/TKLC</a></p>
+	</div>
+</div>
+</body>
+
+<!-- Greensock GSAP -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+
+<!-- TKLC -->
+<script>
+	var tklib = {};
+	tklib.DISPLAY_NAME = "728x90";
+	//	tklib.ENV__TEST_HOSTS = ["localhost", "tmp5258.s3.amazonaws.com"];
+	tklib.traceEnabled = true;
+</script>
+<script src="//d1bh1gwjshk0ig.cloudfront.net/libs/tklc/TKLC_v1.0.9.min.js"></script>
+
+<script>
+
+	var globalTimeline = null;
+
+	function initAd() {
+
+		trace("initAd");
+
+		var box	= document.getElementById("box");
+
+		var gtl = new TimelineMax({paused: true, onComplete: onLoop});
+
+		gtl.addLabel("start", 0.0);
+
+		gtl.set(box,			  {opacity: 1.00, x: 0, y: 0, width: 160, height: 90}, 0.0);
+
+		gtl.to(box,			0.50, {opacity: 1.00}, 0.25);
+
+		gtl.to(box,			2.00, {x: 568.0, ease: Elastic.easeOut}, 1.0);
+		gtl.to(box,			1.00, {x: 568.0, width: 320.0}, 3.0);
+		gtl.to(box,			3.00, {y: 510.0, ease: Power4.easeIn}, 5.0);
+		gtl.to(box,			1.00, {x:   0.0, width: 160.0}, 8.0);
+		gtl.to(box,			1.00, {y:   0.0}, 9.0);
+
+		trace("animation length (one loop) ::: " + gtl.duration());
+
+		globalTimeline = gtl;
+	}
+
+	var numLoops = 0;
+	var loopWithoutLC = false;
+
+	function onLoop() {
+		trace("onLoop ::: numLoops ::: " + numLoops++);
+
+		if(loopWithoutLC) {
+			onSync();
+		} else {
+			tklib.tklc.sendMessage(tklib.TKLC.MSG__SYNC);
+		}
+	}
+
+	function initLocalConnection() {
+		trace("initLocalConnection");
+
+		tklib.tklc = new tklib.TKLC();
+		tklib.tklc.on(tklib.TKLC.EVENT__START_WITH_LC, startWithLC);
+		tklib.tklc.on(tklib.TKLC.EVENT__START_WITHOUT_LC, startWithoutLC);
+
+		// Custom messages to send. eg. a sync message
+		tklib.TKLC.MSG__SYNC = "MSG__SYNC";
+
+		tklib.tklc.on(tklib.TKLC.MSG__SYNC, onSync);
+
+		tklib.tklc.init("728x90", ["160x600"], true, tklib.TKLC.API__SESSION_STORAGE, null);
+	}
+
+	function startWithLC() {
+		onLoop();
+	}
+
+	function startWithoutLC() {
+		loopWithoutLC = true;
+		onLoop();
+	}
+
+	function onSync() {
+		trace("onSync");
+		globalTimeline.play("start");
+	}
+
+	function onWindowLoaded() {
+		trace("onWindowLoaded");
+		initAd();
+		initLocalConnection();
+	}
+
+	window.onload = onWindowLoaded;
+
+</script>
+</html>
