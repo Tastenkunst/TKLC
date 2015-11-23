@@ -1,21 +1,20 @@
-/*!
- * Version: TKLC_151119_v1.0.9
- * Date: 2015-11-19
- * Updates and docs at: https://github.com/Tastenkunst/TKLC
- *
- * Copyright (c) 2015, Tastenkunst GmbH. All rights reserved.
- *
- * Includes support for the following Local Connection APIs:
- * + postMessage
- * + postMessage bridge (for test embedding of LC ads in one html file )
- * + sessionStorage (works well, but Google does not allow it)
- * + FlashTalking talk Method (based on postMessage)
- * + FlashTalking Talk class (based on local storage)
- * + Adform (based on postMessage)
- * + IQ Digital (+ their postMessage Message Brigde)
- *
- * @author: Marcel Klammer, m.klammer@tastenkunst.com
- **/
+
+Version: TKLC_151119_v1.0.9
+Date: 2015-11-19
+Updates and docs at: https://github.com/Tastenkunst/TKLC
+
+Copyright (c) 2015, Tastenkunst GmbH. All rights reserved.
+
+Includes support for the following Local Connection APIs:
+ * postMessage
+ * postMessage bridge (for test embedding of LC ads in one html file )
+ * sessionStorage (works well, but Google does not allow it)
+ * FlashTalking talk Method (based on postMessage)
+ * FlashTalking Talk class (based on local storage)
+ * Adform (based on postMessage)
+ * IQ Digital (+ their postMessage Message Brigde)
+
+@author: Marcel Klammer, m.klammer@tastenkunst.com
 
 Download:
 https://www.dropbox.com/s/7qk25rrpwi6h2xf/TKLC_151119_v1.0.9_release.zip?dl=0
