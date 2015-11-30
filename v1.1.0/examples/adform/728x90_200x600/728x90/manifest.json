@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "title": "",
+  "description": "",
+  "width": 728,
+  "height": 90,
+  "events": {
+    "enabled": 0,
+    "list": {
+    }
+  },
+  "clicktags": {
+    "clickTAG": "http://www.tastenkunst.com"
+  },
+  "source": "index.html"
+}

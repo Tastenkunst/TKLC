@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="ad.size" content="width=160,height=600">
+
+	<style>
+
+		html, body 					{ padding: 0; margin: 0; overflow: hidden; }
+		img 						{ padding: 0; margin: 0; position: absolute; border: none; }
+		div 						{ padding: 0; margin: 0; position: absolute; display: block; }
+
+		.tk_v151129					{ left:   0;   top:   0;   width: 200px; height: 600px; cursor: pointer; }
+
+		#container_ad				{ background-color: #777777; overflow: hidden; }
+
+		.outline					{ left:   0;   top:   0;   width: 200px; height: 600px; background: #ff0000; }
+		#outline_top				{ 										 height:   1px; }
+		#outline_left				{			   top:  89px; width:   1px; height: 511px; }
+		#outline_right				{ left: 199px;			   width:   1px;				}
+		#outline_bottom				{			   top: 599px;				 height:   1px; }
+
+		#box						{ left:-728px; top:   0;   width: 160px; height:  90px; background: #26aaf4; }
+
+	</style>
+</head>
+<body>
+	<div id="container_ad" class="tk_v151129">
+		<div id="container_scale" class="tk_v151129">
+
+			<div id="box"></div>
+
+			<div id="outline_top"		class="outline"></div>
+			<div id="outline_bottom"	class="outline"></div>
+			<div id="outline_left"		class="outline"></div>
+			<div id="outline_right"		class="outline"></div>
+
+		</div>
+	</div>
+</body>
+
+<!-- FlashTalking -->
+<script src="//cdn.flashtalking.com/frameworks/js/api/2/9/html5API.js"></script>
+<!-- FlashTalking - Greensock GSAP -->
+<script src="//cdn.flashtalking.com/frameworks/js/gsap/latest/TweenMax.min.js"></script>
+
+<!-- TKLC -->
+<script>
+	var tklib = {};
+	tklib.traceEnabled = true;
+	tklib.DISPLAY_NAME = "200x600";
+	tklib.ENV__TEST_HOSTS = ["localhost", "tmp5258.s3.amazonaws.com"];
+</script>
+<script src="//d1bh1gwjshk0ig.cloudfront.net/libs/tklc/TKLC_v1.1.0.min.js"></script>
+
+<script>
+
+	var myFT = new FT();
+
+	myFT.applyClickTag(myFT.$("container_ad"));
+
+	// #############################################
+
+	//
+	// Timeline ::: START
+	//
+
+	var globalTimeline = null;
+
+	var initAd = function() {
+
+		var box	= document.getElementById("box");
+
+		var gtl = new TimelineMax({paused: true, onComplete: onLoop});
+		var cl	= "";
+
+		gtl.addLabel("start", cl+"+=0.00"); cl = "start";
+
+		gtl.set(box,				  {opacity: 0.00, x: 0, y: 0, width: 400, height: 90}, cl+"+=0.00");
+
+		gtl.addLabel("phase1", cl+"+=0.25"); cl = "phase1";
+
+		gtl.to(box,				1.00, {opacity: 1.00}, cl+"+=0.00");
+
+		gtl.addLabel("phase2", cl+"+=1.00"); cl = "phase2";
+
+		gtl.to(box,				3.00, {x: 528.0, ease: Elastic.easeOut}, cl+"+=0.00");
+		gtl.to(box,				1.00, {width: 200, ease: Power4.easeOut}, cl+"+=0.00");
+
+		gtl.addLabel("phase3", cl+"+=3.00"); cl = "phase3";
+
+		gtl.to(box,				1.00, {width: 400.0}, cl+"+=0.00");
+
+		gtl.addLabel("phase4", cl+"+=1.00"); cl = "phase4";
+
+		gtl.to(box,				1.00, {height: 600.0}, cl+"+=0.00");
+
+		gtl.addLabel("phase5", cl+"+=1.00"); cl = "phase5";
+
+		gtl.to(box,				3.00, {height: 90.0, y: 510.0, ease: Power4.easeIn}, cl+"+=0.00");
+
+		gtl.addLabel("fadeout", cl+"+=3.00"); cl = "fadeout";
+
+		gtl.to(box,				1.00, {opacity: 0.0}, cl+"+=0.00");
+
+		gtl.addLabel("end", cl+"+=1.00"); cl = "end";
+
+		gtl.seek("phase1");
+
+		tklib.trace("animation length (one loop) ::: " + gtl.duration() + " ::: maxLoops ::: " + maxLoops);
+
+		globalTimeline = gtl;
+	};
+
+	//
+	// Timeline ::: END
+	//
+
+	// #############################################
+
+	//
+	// Loop Behavior ::: START
+	//
+
+	var maxLoops = -1;	// Number of loops including the first run.
+	var numLoops = 0;	// Current number of loops. Starts with 1 (the first run).
+
+	var onLoop = function() {
+
+		if(isUsingLC() && !isMaster()) {
+			return;
+		}
+
+		if((numLoops == 1 && maxLoops == 1) || (maxLoops > 0 && numLoops > maxLoops)) {
+			return; // Only one run through.
+		}
+
+		numLoops++;
+
+		trace("onLoop ::: isMaster ::: " + isMaster() + " ::: loop " + numLoops + " of " + maxLoops);
+
+		if(maxLoops == -1 || numLoops < maxLoops) {
+			if(isMaster()) {
+				tklib.tklc.sendMessage(tklib.TKLC.MSG__SYNC_TIMELINE__FULL_LOOP, "");
+			} else {
+				playFullLoop();
+			}
+		} else if(numLoops == maxLoops) {
+			if(isMaster()) {
+				tklib.tklc.sendMessage(tklib.TKLC.MSG__SYNC_TIMELINE__LAST_LOOP, "");
+			} else {
+				playLastLoop();
+			}
+		}
+	};
+
+	//
+	// Loop Behavior ::: END
+	//
+
+	// #############################################
+
+	//
+	// TK ::: #TKLC ::: START
+	//
+
+	function initLocalConnection() {
+
+		tklib.tklc = new tklib.TKLC();
+
+//		tklib.tklc.forceAPI = true; // Set to false to be able to test on localhost
+//		tklib.tklc.traceEventListeners = false;
+//		tklib.tklc.traceTestConnection = false;
+
+		tklib.tklc.on(tklib.TKLC.EVENT__START_WITH_LC, startWithLC);
+		tklib.tklc.on(tklib.TKLC.EVENT__START_WITHOUT_LC, startWithoutLC);
+
+		// Custom messages to send. eg. a sync message
+		tklib.TKLC.MSG__SYNC_TIMELINE__FULL_LOOP = "MSG__SYNC_TIMELINE__FULL_LOOP";
+		tklib.TKLC.MSG__SYNC_TIMELINE__LAST_LOOP = "MSG__SYNC_TIMELINE__LAST_LOOP";
+
+		tklib.tklc.on(tklib.TKLC.MSG__SYNC_TIMELINE__FULL_LOOP, playFullLoop);
+		tklib.tklc.on(tklib.TKLC.MSG__SYNC_TIMELINE__LAST_LOOP, playLastLoop);
+
+		tklib.tklc.init("200x600", ["728x90"], false, tklib.TKLC.API__FLASHTALKING_PM);
+	}
+
+	function isMaster() {
+		return tklib.tklc.isMaster && isUsingLC();
+	}
+
+	function isUsingLC() {
+		return tklib.tklc.isValidAPI && tklib.tklc.api != tklib.TKLC.API__NONE;
+	}
+
+	/** Start the ad with Local Connection functionality. */
+	function startWithLC() {
+		trace("startWithLC");
+		onLoop();
+	}
+
+	/** Start the ad without Local Connection functionality. */
+	function startWithoutLC() {
+		trace("startWithoutLC");
+		onLoop();
+	}
+
+	//
+	// TK ::: TKLC ::: END
+	//
+
+	// #############################################
+
+	//
+	// Page Init ::: START
+	//
+
+	function playFullLoop() {
+		trace("playFullLoop ::: timestamp: " + (new Date()).getTime());
+		globalTimeline.play("phase1");
+	}
+
+	function playLastLoop() {
+		trace("playLastLoop ::: timestamp: " + (new Date()).getTime());
+		globalTimeline.tweenFromTo("phase1", "fadeout");
+	}
+
+	function onWindowLoaded() {
+		trace("onWindowLoaded ::: initAd ::: initLocalConnection");
+		initAd();
+		initLocalConnection();
+	}
+
+	window.onload = onWindowLoaded;
+
+	//
+	// Page Init ::: END
+	//
+
+	// #############################################
+
+</script>
+</html>

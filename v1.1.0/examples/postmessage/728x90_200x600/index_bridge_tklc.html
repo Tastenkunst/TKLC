@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<style>
+
+		html, body 			{ padding: 0; margin: 0; overflow: hidden; }
+		div 				{ padding: 0; margin: 0; position: absolute; display: block; }
+		iframe				{ position: absolute; display: block; margin: 0; padding: 0; border-style: none; }
+
+		.tk_v151129			{ left:   0;   top:   0;   width: 100vw; height: 100vh; background: #ffffff;}
+		#site				{ position: relative; 	   width: 928px; height: 100%;  margin-left: auto; margin-right: auto;}
+
+		#leader				{ left:   0;   top:   0;   width: 728px; height:  90px; }
+		#sky_right			{ left: 728px; top:   0;   width: 200px; height: 600px; }
+		#content			{ left:   0;   top:  95px; width: 723px; height: 800px; background-color: #e0e0e0; }
+
+	</style>
+</head>
+<body>
+<div id="site_wrapper" class="tk_v151129">
+	<div id="site">
+		<div id="content"></div>
+		<iframe id="leader" src="728x90/index.html" frameborder="0"></iframe>
+		<iframe id="sky_right" src="200x600/index.html" frameborder="0"></iframe>
+	</div>
+</div>
+</body>
+
+<!-- TKLC -->
+<script>
+	var tklib = {};
+	tklib.traceEnabled = true;
+	tklib.DISPLAY_NAME = "index";
+</script>
+<script src="//d1bh1gwjshk0ig.cloudfront.net/libs/tklc/TKLC_v1.1.0.min.js"></script>
+
+<script>
+
+	// This html file is a message bridge for postMessage events.
+	// It sends all message events to all provided iframes (ids in Array).
+	function onWindowLoaded() {
+		tklib.tklc = new tklib.TKLC();
+		tklib.tklc.init("index", ["leader", "sky_right"], false, tklib.TKLC.API__POST_MESSAGE_BRIDGE);
+	}
+
+	window.onload = onWindowLoaded;
+
+</script>
+</html>

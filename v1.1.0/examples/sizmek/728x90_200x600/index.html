@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<script src="https://secure-ds.serving-sys.com/BurstingScript/adKit/adkit.js"></script>
+	<script>EBModulesToLoad = ['EBCMD'];</script>
+	<script type="text/javascript" src="scripts/expandable_banner.js"></script>
+
+</head>
+<body>
+</body>
+
+<script type="text/javascript">
+
+	function initAdKit() {
+		adkit.onReady(startAd);
+	}
+
+	function startAd() {
+		EB.expand({panelName: "leaderboard"});
+		EB.expand({panelName: "sky_right"});
+	}
+
+	window.onload = initAdKit;
+
+</script>
+</html>

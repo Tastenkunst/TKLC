@@ -1,28 +1,25 @@
-Version: TKLC_151129_v1.1.9
-Date: 2015-11-29
-Docs, examples, updates at: https://github.com/Tastenkunst/TKLC
-
-Copyright (c) 2015, Tastenkunst GmbH. All rights reserved.
-
-Includes support for the following Local Connection APIs:
-+ postMessage
-+ postMessage bridge (for test embedding of LC ads in one html file )
-+ sessionStorage (not allowed on all Google Ad platforms, will also fail with Third-Party-Cookies disabled in browser settings)
-+ DirectMessage (TKLC implementation of direct javascript access of same origin iframes)
-+ FlashTalking talk Method (based on postMessage)
-+ FlashTalking Talk class (based on a DirectMessage approach)
-+ Adform (based on postMessage)
-+ IQ Digital (+ their postMessage Message Bridge)
-
-DirectMessage will also work on MediaMind/Sizmek and DoubleClick,
-if ads are served as same origin for an ad placement.
-
-@author: Marcel Klammer, m.klammer@tastenkunst.com
-
-##########
-
-Single Download of current release:
-https://www.dropbox.com/s/1vrk2cq1vq9r3z0/TKLC_151129_v1.1.0_release.zip?dl=0
+/*!
+ * Version: TKLC_151129_v1.1.0
+ * Date: 2015-11-29
+ * Docs, examples, updates at: https://github.com/Tastenkunst/TKLC
+ *
+ * Copyright (c) 2015, Tastenkunst GmbH. All rights reserved.
+ *
+ * Includes support for the following Local Connection APIs:
+ * + postMessage
+ * + postMessage bridge (for test embedding of LC ads in one html file )
+ * + sessionStorage (not allowed on all Google Ad platforms, will also fail with Third-Party-Cookies disabled in browser settings)
+ * + DirectMessage (TKLC implementation of direct javascript access of same origin iframes)
+ * + FlashTalking talk Method (based on postMessage)
+ * + FlashTalking Talk class (based on a DirectMessage approach)
+ * + Adform (based on postMessage)
+ * + IQ Digital (+ their postMessage Message Bridge)
+ *
+ * DirectMessage will also work on MediaMind/Sizmek and DoubleClick,
+ * if ads are served as same origin for an ad placement.
+ *
+ * @author: Marcel Klammer, m.klammer@tastenkunst.com
+ **/
 
 ##########
 
