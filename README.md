@@ -2,7 +2,7 @@
 Date: 2015-11-29  
 Docs, examples, updates at: https://github.com/Tastenkunst/TKLC
 
-### Copyright (c) 2015, Tastenkunst GmbH. All rights reserved.
+##### Copyright (c) 2015, Tastenkunst GmbH. All rights reserved.
 
 Includes support for the following Local Connection APIs:
 + postMessage
