@@ -19,7 +19,7 @@ DirectMessage will also work on
 + DoubleClick,  
 if ads are served as same origin for an ad placement.
 
-### @author: Marcel Klammer, m.klammer@tastenkunst.com
+##### @author: Marcel Klammer, m.klammer@tastenkunst.com
 
 ### Single Download of current release:
 https://www.dropbox.com/s/1vrk2cq1vq9r3z0/TKLC_151129_v1.1.0_release.zip?dl=0
