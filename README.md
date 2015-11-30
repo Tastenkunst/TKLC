@@ -70,9 +70,9 @@ window.top (site embedding the ads)
 + ad iframe 1: protocol: https:// - document.domain: s0.cdn.example.com
 + ad iframe 2: protocol: https:// - document.domain: s1.cdn.example.com  
 -> different subdomains -> cross domain  
-	-> try to rewrite document.domain to cdn.example.com  
-		-> success only if cdn.example.com or example.com is no TLD -> same origin  
-		-> fail -> cross domain  
+&nbsp;&nbsp;&nbsp;&nbsp;-> try to rewrite document.domain to cdn.example.com  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> success only if cdn.example.com or example.com is no TLD -> same origin  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> fail -> cross domain  
 
 same origin: tklib.TKLC.API__DIRECT_MESSAGE should perfectly work for developers, ad servers and publishers  
 cross domain: tklib.TKLC.API__POST_MESSAGE (in any form) is the way to go, but ad servers and publishers need to relay/bridge messages, which is a pain for all parties involved.
