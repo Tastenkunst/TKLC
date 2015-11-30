@@ -42,7 +42,7 @@ http://www.flashtalking.net/view/demo/52821/5/?684
 ##### tklib.TKLC.API__FLASHTALKING_PM (postMessage)
 http://www.flashtalking.net/view/demo/52821/4/?808
 
-##### tklib.TKLC.API__DIRECT_MESSAGE (DirectMessage working on FlashTalking, leave out the communication part in the manifest.js, NOT recommended)
+##### tklib.TKLC.API__DIRECT_MESSAGE (DirectMessage working on FlashTalking, leave out the communication part in the manifest.js, NOT recommended for FT placements)
 http://www.flashtalking.net/view/demo/52821/6/?561
 
 ##### tklib.TKLC.API__ADFORM
