@@ -63,18 +63,18 @@ There is no standard yet. It breaks down to two situations:
 
 window.top (site embedding the ads)
 + ad iframe 1: protocol: https:// - document.domain: s0.cdn.example.com
-+ ad iframe 2: protocol: https:// - document.domain: s0.cdn.example.com
++ ad iframe 2: protocol: https:// - document.domain: s0.cdn.example.com  
 -> same origin
 
 window.top (site embedding the ads)
 + ad iframe 1: protocol: https:// - document.domain: s0.cdn.example.com
-+ ad iframe 2: protocol: https:// - document.domain: s1.cdn.example.com
--> different subdomains -> cross domain
-	-> try to rewrite document.domain to cdn.example.com
-		-> success only if cdn.example.com or example.com is no TLD -> same origin
-		-> fail -> cross domain
++ ad iframe 2: protocol: https:// - document.domain: s1.cdn.example.com  
+-> different subdomains -> cross domain  
+	-> try to rewrite document.domain to cdn.example.com  
+		-> success only if cdn.example.com or example.com is no TLD -> same origin  
+		-> fail -> cross domain  
 
-same origin: tklib.TKLC.API__DIRECT_MESSAGE should perfectly work for developers, ad servers and publishers
+same origin: tklib.TKLC.API__DIRECT_MESSAGE should perfectly work for developers, ad servers and publishers  
 cross domain: tklib.TKLC.API__POST_MESSAGE (in any form) is the way to go, but ad servers and publishers need to relay/bridge messages, which is a pain for all parties involved.
 
 Conclusion: Get the Ad Servers and Publishers to the point where they go for the same subdomain for serving ads for one ad placement. E.g. all elements of a Wallpaper or Fireplace should be served from one subdomain, can't be that hard, uh?
@@ -84,24 +84,24 @@ Conclusion: Get the Ad Servers and Publishers to the point where they go for the
 ##### Google/DoubleClick:
 + Does not allow local/session storage (https://support.google.com/richmedia/answer/2853194?hl=en),
 + has a techlab prototype experiment of a Local Connect API (https://www.richmediagallery.com/detailPage?id=8135), but
-+ only sends out that prototype to Core Certified Developers
--> No real LC support via the Enabler API.
++ only sends out that prototype to Core Certified Developers  
+-> No real LC support via the Enabler API.  
 -> Same origin: tklib.TKLC.API__DIRECT_MESSAGE works fine.
 
 ##### Sizmek:
 + Doesn't seem to have an own EB API solution.
-+ Sizmek support suggested sessionStorage in September, but I won't use that for obvious reasons.
++ Sizmek support suggested sessionStorage in September, but I won't use that for obvious reasons.  
 -> Same origin: tklib.TKLC.API__DIRECT_MESSAGE works fine.
 
 ##### FlashTalking:
 + Has two own myFT API solutions:
 + 1. talk method (postMessage)
-+ 2. Talk class (Direct Message approach), independent from publishers, since FT serves (usually?) all ads of one placement with same origin.
++ 2. Talk class (Direct Message approach), independent from publishers, since FT serves (usually?) all ads of one placement with same origin.  
 -> Recommended: Use myFT Talk class (tklib.TKLC.API__FLASHTALKING_DM).
 
 ##### Adform:
-+ Has an own postMessage API.
-- Recommended: Use their API (tklib.TKLC.API__ADFORM).
++ Has an own postMessage API.  
+-> Recommended: Use their API (tklib.TKLC.API__ADFORM).
 
 ##### Swiffy:
 + All APIs are possible, since

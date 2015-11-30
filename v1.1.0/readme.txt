@@ -104,7 +104,7 @@ FlashTalking:
 
 Adform:
 + Has an own postMessage API.
-- Recommended: Use their API (tklib.TKLC.API__ADFORM).
+-> Recommended: Use their API (tklib.TKLC.API__ADFORM).
 
 Swiffy:
 + All APIs are possible, since
