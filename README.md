@@ -14,7 +14,9 @@ Includes support for the following Local Connection APIs:
 + Adform (based on postMessage)
 + IQ Digital (+ their postMessage Message Bridge)
 
-DirectMessage will also work on MediaMind/Sizmek and DoubleClick,  
+DirectMessage will also work on 
++ MediaMind/Sizmek and 
++ DoubleClick,  
 if ads are served as same origin for an ad placement.
 
 ### @author: Marcel Klammer, m.klammer@tastenkunst.com
